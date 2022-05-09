@@ -1,5 +1,12 @@
 const connection = require('./connection');
 
+const serialize = (data) => ({
+    saleId: data.sale_id,
+    date: data.date,
+    productId: data.product_id,
+    quantity: data.quantity,
+  });
+
 const getAllSales = async () => {
   const query = `
   SELECT
@@ -13,7 +20,7 @@ const getAllSales = async () => {
   `;
   const [sales] = await connection.execute(query);
 
-  return sales;
+  return sales.map(serialize);
 };
 
 const getSalesById = async (id) => {
@@ -30,7 +37,7 @@ const getSalesById = async (id) => {
 
   if (sale.length === 0) return null;
 
-  return sale;
+  return sale.map(serialize);
 };
 
 module.exports = {
