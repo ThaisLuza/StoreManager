@@ -1,6 +1,7 @@
 const express = require('express');
 const productController = require('./controllers/productController');
 const saleController = require('./controllers/saleController');
+const middlewares = require('./middlewares');
 
 const app = require('./app');
 require('dotenv').config();
@@ -14,6 +15,14 @@ app.get('/products', productController.getAllProducts);
 app.get('/sales/:id', saleController.getSalesById);
 
 app.get('/sales', saleController.getAllSales);
+
+app.post('/products', middlewares.validateProduct, productController.createProduct);
+
+app.use((err, req, res, _next) => {
+  if (err.status) { return res.status(err.status).json({ message: err.message }); }
+
+  return res.status(500).json({ message: 'Internal Server Error' });
+});
 
 app.listen(process.env.PORT, () => {
   console.log(`Escutando na porta ${process.env.PORT}`);
