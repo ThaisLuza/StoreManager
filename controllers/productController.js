@@ -41,10 +41,21 @@ const updateProduct = async (req, res, next) => {
     const { id } = req.params;
     const { name, quantity } = req.body;
 
-    const data = { name, quantity }
+    const data = { name, quantity };
     const newData = await productService.updateProduct(id, data);
 
     return res.status(200).json(newData);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const deleteProduct = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    await productService.deleteProduct(id);
+    return res.status(204).end();
   } catch (err) {
     next(err);
   }
@@ -55,4 +66,5 @@ module.exports = {
   getProductsById,
   createProduct,
   updateProduct,
+  deleteProduct,
 };

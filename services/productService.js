@@ -38,9 +38,18 @@ const updateProduct = async (id, data) => {
   return newData;
 };
 
+const deleteProduct = async (id) => {
+  const verifyId = await productModel.getProductsById(id);
+
+  if (!verifyId) throw erroHandler(404, 'Product not found');
+
+  await productModel.deleteProduct(id);
+};
+
 module.exports = {
   getAllProducts,
   getProductsById,
   createProduct,
   updateProduct,
+  deleteProduct,
 };

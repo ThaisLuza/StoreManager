@@ -20,6 +20,8 @@ app.get('/sales', saleController.getAllSales);
 
 app.post('/products', middlewares.validateProduct, productController.createProduct);
 
+app.delete('/products/:id', productController.deleteProduct);
+
 app.use((err, req, res, _next) => {
   if (err.status) {
  return res.status(err.status).json({ message: err.message });
