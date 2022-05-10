@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 const SALES = Joi.object({
-  productId: Joi.string().required(),
+  productId: Joi.number().min(1).required(),
   quantity: Joi.number().min(1).required(),
 });
 

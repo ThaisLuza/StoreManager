@@ -14,19 +14,21 @@ app.get('/products/:id', productController.getProductsById);
 
 app.get('/products', productController.getAllProducts);
 
-app.get('/sales/:id', saleController.getSalesById);
-
-app.get('/sales', saleController.getAllSales);
-
 app.post('/products', middlewares.validateProduct, productController.createProduct);
 
 app.delete('/products/:id', productController.deleteProduct);
+
+app.post('/sales', saleController.createSale);
+
+app.get('/sales/:id', saleController.getSalesById);
+
+app.get('/sales', saleController.getAllSales);
 
 app.use((err, req, res, _next) => {
   if (err.status) {
  return res.status(err.status).json({ message: err.message });
  }
- console.log(err);
+//  console.log(err);
   return res.status(500).json({ message: 'Internal Server Error' });
 });
 

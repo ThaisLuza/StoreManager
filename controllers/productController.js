@@ -31,7 +31,6 @@ const createProduct = async (req, res, next) => {
 
     return res.status(201).json(newProduct);
   } catch (err) {
-    // console.log('create', err.message);
     next(err);
   }
 };
