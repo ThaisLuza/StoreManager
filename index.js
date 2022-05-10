@@ -8,6 +8,8 @@ require('dotenv').config();
 
 app.use(express.json());
 
+app.put('/products/:id', middlewares.validateProduct, productController.updateProduct);
+
 app.get('/products/:id', productController.getProductsById);
 
 app.get('/products', productController.getAllProducts);
@@ -19,8 +21,10 @@ app.get('/sales', saleController.getAllSales);
 app.post('/products', middlewares.validateProduct, productController.createProduct);
 
 app.use((err, req, res, _next) => {
-  if (err.status) { return res.status(err.status).json({ message: err.message }); }
-
+  if (err.status) {
+ return res.status(err.status).json({ message: err.message });
+ }
+ console.log(err);
   return res.status(500).json({ message: 'Internal Server Error' });
 });
 

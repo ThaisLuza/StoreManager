@@ -28,8 +28,19 @@ const createProduct = async (name, quantity) => {
   return newProduct;
 };
  
+const updateProduct = async (id, data) => {
+  const verifyId = await productModel.getProductsById(id);
+
+  if (!verifyId) throw erroHandler(404, 'Product not found');
+
+  const newData = await productModel.updateProduct(id, data);
+
+  return newData;
+};
+
 module.exports = {
   getAllProducts,
   getProductsById,
   createProduct,
+  updateProduct,
 };
