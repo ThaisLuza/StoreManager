@@ -1,5 +1,5 @@
 const saleModel = require('../models/saleModel');
-const erroHandler = require('../utils/erroHandler');
+const { erroHandler } = require('../utils/erroHandler');
 
 const getAllSales = async () => {
   const sales = await saleModel.getAllSales();

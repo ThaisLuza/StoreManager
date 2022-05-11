@@ -1,16 +1,16 @@
 const express = require('express');
 const productController = require('../../controllers/productController');
-const validateProduct = require('../../middlewares/validProduct');
+const validateProducts = require('../../middlewares/validProduct');
 
 const routeProduct = express.Router();
 
 routeProduct.get('/', productController.getAllProducts);
 
-routeProduct.post('/', validateProduct, productController.createProduct);
+routeProduct.post('/', validateProducts, productController.createProduct);
 
 routeProduct.get('/:id', productController.getProductsById);
 
-routeProduct.put('/:id', validateProduct, productController.updateProduct);
+routeProduct.put('/:id', validateProducts, productController.updateProduct);
 
 routeProduct.delete('/:id', productController.deleteProduct);
 
