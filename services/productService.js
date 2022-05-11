@@ -1,8 +1,5 @@
 const productModel = require('../models/productModel');
-
-const erroHandler = (status, message) => ({
-  status, message,
-});
+const erroHandler = require('../utils/erroHandler');
 
 const getAllProducts = async () => {
   const products = await productModel.getAllProducts();
