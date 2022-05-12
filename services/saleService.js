@@ -10,7 +10,7 @@ const getAllSales = async () => {
 const getSalesById = async (id) => {
   const sale = await saleModel.getSalesById(id);
 
-  if (!sale) throw new Error('error');
+  if (!sale) throw erroHandler(404, 'Sale not found');
 
   return sale;
 };
@@ -26,14 +26,20 @@ const createSale = async (data) => {
 };
 
 const updateSale = async (id, data) => {
-  const verifyId = await getSalesById(id);
-  console.log(id);
+   await getSalesById(id);
+  // console.log(id);
 
-  if (!verifyId) throw erroHandler(404, 'Sale not found');
+  // if (!verifyId) throw erroHandler(404, 'Sale not found');
 
   await data.forEach((sale) =>
     saleModel.updateSale(id, sale.productId, sale.quantity));
     return ({ saleId: id, itemUpdated: data });
+};
+
+const deleteSale = async (id) => {
+  await getSalesById(id);
+  
+  await saleModel.deleteSale(id);
 };
 
 module.exports = {
@@ -41,4 +47,5 @@ module.exports = {
   getSalesById,
   createSale,
   updateSale,
+  deleteSale,
 };
