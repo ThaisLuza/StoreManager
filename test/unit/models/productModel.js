@@ -4,7 +4,7 @@ const productModel = require("../../../models/productModel");
 const connection = require("../../../models/connection");
 
 // função getAllProducts
-describe("Chamada do Model - busca todos os produtos no BD", () => {
+describe("Chamada do Model - getAllProducts", () => {
   describe("quando não existe nenhum produto", () => {
     const resultExecute = [[]];
 
@@ -66,8 +66,59 @@ describe("Chamada do Model - busca todos os produtos no BD", () => {
   });
 });
 
+// função getById
+describe("Chamada do Model - getProductById", () => {
+  describe("quando não existe produto com o id informado", () => {
+    before(async () => {
+      const execute = [[]];
+
+      sinon.stub(connection, "execute").resolves(execute);
+    });
+
+    after(async () => {
+      connection.execute.restore();
+    });
+    it("retorna um array", async () => {
+      const result = await productModel.getAllProducts();
+      expect(result).to.be.an("array");
+    });
+
+    it("o array está vazio", async () => {
+      const result = await productModel.getAllProducts();
+      expect(result).to.be.empty;
+    });
+  });
+  describe('quando existe produto com o id informado', () => {
+    before(()=>{
+      sinon.stub(productModel, 'getProductsById').resolves({
+        id:1,
+        name:'produto',
+        quantity:10
+      })
+    })
+    after(() => {
+      productModel.getProductsById.restore()
+    })
+    it('retorna um objeto', async()=> {
+      const response = await productModel.getProductsById(1)
+
+      expect(response).to.be.an('object')
+    })
+    it("o objeto não está vazio", async () => {
+      const response = await productModel.getProductsById(1);
+      expect(response).to.be.not.empty;
+    });
+
+
+    it("o objeto contem os atributos id, name e quantity", async () => {
+      const item = await productModel.getProductsById(1);
+      expect(item).to.include.all.keys("id", "name", "quantity");
+    });
+  })
+});
+
 //função createProduct
-describe("Chamada do Model - cria um novo produto", () => {
+describe("Chamada do Model - createProduct", () => {
   const data = {
     name: "produto 2",
     quantity: 2,
