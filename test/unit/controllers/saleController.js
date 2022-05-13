@@ -68,4 +68,3 @@ describe("Controller - getAllSales", () => {
   });
 });
 
-// linha pra ver se o código passa no github dessa vez
