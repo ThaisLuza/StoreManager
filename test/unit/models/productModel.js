@@ -4,7 +4,7 @@ const productModel = require("../../../models/productModel");
 const connection = require("../../../models/connection");
 
 // função getAllProducts
-describe("Chamada do Model - getAllProducts", () => {
+describe("Model - getAllProducts", () => {
   describe("quando não existe nenhum produto", () => {
     const resultExecute = [[]];
 
@@ -67,7 +67,7 @@ describe("Chamada do Model - getAllProducts", () => {
 });
 
 // função getById
-describe("Chamada do Model - getProductById", () => {
+describe("Model - getProductById", () => {
   describe("quando não existe produto com o id informado", () => {
     before(async () => {
       const execute = [[]];
@@ -118,7 +118,7 @@ describe("Chamada do Model - getProductById", () => {
 });
 
 //função createProduct
-describe("Chamada do Model - createProduct", () => {
+describe("Model - createProduct", () => {
   const data = {
     name: "produto 2",
     quantity: 2,

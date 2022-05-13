@@ -4,7 +4,7 @@ const productModel = require("../../../models/productModel");
 const productService = require("../../../services/productService");
 
 // função getAllProducts
-describe("Chamada da Service - getAllProducts", () => {
+describe("Service - getAllProducts", () => {
   describe("quando não existe nenhum produto", () => {
     before(() => {
       sinon.stub(productModel, "getAllProducts").resolves([]);
@@ -63,7 +63,7 @@ describe("Chamada da Service - getAllProducts", () => {
 });
 
 // função getProductById
-describe("Chamada da Service - getProductById", () => {
+describe("Service - getProductById", () => {
   describe("quando não existe um produto com o ID informado", () => {
     // const id = 10;
     before(async () => {
@@ -113,7 +113,7 @@ describe("Chamada da Service - getProductById", () => {
 });
 
 // função createProduct
-describe("Chamada da Service - createProduct", () => {
+describe("Service - createProduct", () => {
   describe("quando o produto já existe", async () => {
     const name = "produto";
     const quantity = 10;
