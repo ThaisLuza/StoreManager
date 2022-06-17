@@ -1,4 +1,4 @@
-# StoreManager
+# Store Manager
 
 :point_right: Desenvolvimento de uma API utilizando a arquitetura MSC (model-service-controller)!
 
